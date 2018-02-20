@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>Calculator</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	/*.my-class.ng-invalid{
+		background: red;
+	}*/
+</style>
+<body ng-app="module">
+	<form ng-controller="controller" name="f" novalidate>
+		<input type="text" ng-model="name1" name="name1" ng-required="true" ng-keyup="show()" ng-pattern="/^\d+$/" class="my-class">
+		<span style="color: red;" ng-show="f.name1.$dirty && f.name1.$invalid">
+			<span style="color: red;" ng-show="f.name1.$error.required">required</span>
+			<span style="color: red;" ng-show="f.name1.$error.pattern">number required</span>
+		</span>
+
+		<br>
+		<input type="text" ng-model="name2" name="name2" ng-required="true" ng-keyup="show()" ng-pattern="/^\d+$/" class="my-class">
+		<span style="color: red;" ng-show="f.name2.$dirty && f.name2.$invalid">
+			<span style="color: red;" ng-show="f.name2.$error.required">required</span>
+			<span style="color: red;" ng-show="f.name2.$error.pattern">number required</span>
+		</span>
+
+		<br>
+		Total: {{sum}}
+	</form>
+</body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript">
+	/**
+	*  Module
+	*
+	* Description
+	*/
+	angular.module('module', []).controller('controller', ['$scope', function($scope){
+		//$scope.name1 ="abc";
+		$scope.show = function(){
+			if(parseInt($scope.name1) && parseInt($scope.name2))
+				$scope.sum = parseInt($scope.name1) + parseInt($scope.name2);
+			else
+				$scope.sum = "";
+		}
+	}])
+</script>
+</html>

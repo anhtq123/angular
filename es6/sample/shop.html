@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shop now</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-cloak ng-controller="myCtrl" class="w3-card-2 w3-margin" style="max-width:400px;">
+        <header class="w3-container w3-light-grey w3-padding-16">
+            <h3>My Shopping List</h3>
+        </header>
+        <ul class="w3-ul">
+            <li ng-repeat="x in products" class="w3-padding-16">{{x}}<span ng-click="removeItem($index)" style="cursor:pointer;color: red;" class="w3-right w3-margin-right">×</span></li>
+        </ul>
+        <div class="w3-container w3-light-grey w3-padding-16">
+            <div class="w3-row w3-margin-top">
+                <div class="w3-col s10">
+                    <input placeholder="Add shopping items here" ng-model="addMe" class="w3-input w3-border w3-padding">
+                </div>
+                <div class="w3-col s2">
+                    <button ng-click="addItem()" class="w3-btn w3-padding w3-green">Add</button>
+                </div>
+            </div>
+            <p class="w3-text-blue">{{count}}</p>
+            <p class="w3-text-red">{{errortext}}</p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', ['ngRoute']);
+    
+    app.factory('fac', function(){
+           var factory = {};
+            
+            factory.countItem = function(n) {
+               return n.length;
+            }
+            return factory;
+    });
+
+    app.controller('myCtrl', ['$scope', 'fac', function($s, f){
+        $s.products = [ "Milk", "Choco", "Cheese" ];
+        $s.errortext ="";
+        $s.count = f.countItem($s.products);
+
+        $s.addItem = function(){
+            if($s.addMe){
+                if($s.products.indexOf($s.addMe) == -1){
+                    $s.products.push($s.addMe);
+                    $s.addMe = "";
+                    $s.errortext ="";
+                } else {
+                    $s.errortext ="duplicate";
+                }
+            }
+            $s.count = f.countItem($s.products);
+        };
+
+        $s.removeItem = function(x){
+            $s.products.pop(x);
+            $s.count = f.countItem($s.products);
+        }
+    }]);
+
+
+</script>
+
+</html>

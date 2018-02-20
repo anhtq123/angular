@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vi du AJAX trong AngularJS</title>
+    <style>
+    table,
+    th,
+    td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+    </style>
+</head>
+
+<body>
+    <h2>Ung dung AngularJS</h2>
+    <div ng-app="" ng-controller="nhanvienController">
+        <table>
+            <tr>
+                <th>Ho va Ten</th>
+                <th>MNV</th>
+                <th>Rank</th>
+            </tr>
+            <tr ng-repeat="nhanvien in emplyee">
+                <td>{{ nhanvien.HovaTen }}</td>
+                <td>{{ nhanvien.MNV }}</td>
+                <td>{{ nhanvien.Rank }}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+    function nhanvienController($scope, $http) {
+        var url = "data.json";
+        $http.get(url).success(function(response) {
+            $scope.framgiaEmplyee = response;
+        });
+        $http.get(url).success(function(res){
+          $scope.emplyee = res;
+        })
+    }
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+</body>
+
+</html>

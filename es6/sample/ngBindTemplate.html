@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ng-bind-template sample</title>
+</head>
+<style type="text/css">
+	.fclass.ng-invalid{
+		background: red;
+	}
+</style>
+<body ng-app="module">
+    <form ng-controller="controller" class="fclass">
+        <input type="input" name="" ng-model="first_name" ng-required="true">
+        <br>
+        <input type="input" name="" ng-model="last_name">
+        <br>
+        <span ng-bind-template="{{first_name}} {{last_name}}"></span>
+    </form>
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript">
+/**
+ * app Module
+ *
+ * Description
+ */
+angular.module('module', []).controller('controller', ['$scope', function($scope) {
+
+}])
+</script>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ng-model</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script>
+		/**
+		* app Module
+		*
+		* Description
+		*/
+		angular.module('app', []).controller('controller', ['$scope', function($scope){
+			$scope.show = function(){
+				if($scope.f.$valid){
+					$scope.total= parseInt($scope.input1) + parseInt($scope.input2);
+					$scope.rcss = "display:block;"	
+				} else{
+					$scope.rcss = "display:none;"	
+				}
+				
+			}
+			$scope.rcss = "display:none;";
+		}])
+
+	</script>
+</head>
+
+<style type="text/css">
+	.my-input.ng-invalid{
+		color: white;
+		background: red;
+	}
+</style>
+<body ng-app="app">
+	<form name="f" ng-controller="controller">
+		First name: <input type="input" name="name1" ng-model-options="{debounce:1000}" ng-model="input1" ng-pattern="/^\d+$/" ng-required="true" class="my-input" ng-keyup="show()">
+		<span style="color: red;" ng-show="f.name1.$dirty && f.name1.$invalid">
+			<span style="color: red;" ng-show="f.name1.error.required"> First name required</span>
+		</span>
+		<br>
+		Last name: <input type="input" name="name2" ng-model="input2" ng-pattern="/^\d+$/" ng-required="true" class="my-input" ng-keyup="show()">
+		<br>
+		<span style="{{rcss}}">Result: {{total}}</span>
+	</form>
+</body>
+</html>

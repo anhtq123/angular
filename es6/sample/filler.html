@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angular js</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="app_filler.js"></script>
+</head>
+
+<body ng-app="orderByExample2">
+    <div ng-controller="ExampleController">
+        <!-- <pre>Sort by = {{propertyName}}; reverse = {{reverse1}}</pre> -->
+        <hr/>
+        <button ng-click="propertyName = null; reverse1 = false">Set to unsorted</button>
+        <hr/>
+        <table class="employees">
+            <tr>
+                <th>
+                    <button ng-click="sortBy('name')">Name</button>
+                    <!-- <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse1}"></span> -->
+                </th>
+                <th>
+                    <button ng-click="sortBy('phone')">Phone Number</button>
+                    <!-- <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse1}"></span> -->
+                </th>
+                <th>
+                    <button ng-click="sortBy('age')">Age</button>
+                    <!-- <span class="sortorder" ng-show="propertyName === 'age'" ng-class="{reverse: reverse1}"></span> -->
+                </th>
+            </tr>
+            <tr ng-repeat="employee in employees | orderBy:propertyName:reverse1">
+                <td>{{employee.name}}</td>
+                <td>{{employee.phone}}</td>
+                <td>{{employee.age}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angular js</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    
+</head>
+
+<body>
+    <div id="main" ng-app="app" ng-controller="MainCtrl">
+    	<button ng-click="clickMe()">Click Me</button>
+    	<p> One-time: {{::student}}</p>
+    	<p> Normal binding: {{student|lowercase}}</p>
+    </div>
+</body>
+<script language="javascript">
+	angular.module("app", [])
+	.controller("MainCtrl", function($scope){
+		var counter = 0;
+		var students = ["A", "B", "C"];
+		$scope.clickMe = function(){
+			$scope.student = students[counter % students.length];
+			counter++;
+		}
+	})
+</script>
+</html>

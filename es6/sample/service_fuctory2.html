@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title>Service & Fuctory 2</title>
+    <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+</head>
+
+<body ng-app="module">
+	<div ng-controller="c">
+		<input type="number" ng-model="number" /> 
+		<button ng-click="click()">X<sup>2</sup></button><br />
+		Result: <span>{{result}}</span>
+	</div>
+
+	<script type="text/javascript">
+		var app = angular.module('module', []);
+		app.factory('f', ['', function(){
+			return function calc(number){
+				return number * number;
+			};
+		}]);
+		app.service('service', ['f', function(f){
+			this.show = function(number, $scope){
+				$scope.result = f.calc(number);
+			}
+		}]);
+		
+		app.controller('c', ['$scope', 'service', function($s, s){
+			$s.click=function(){
+				s.show($s.number, $s);
+			}
+		}])
+		
+	</script>
+</body>
+
+</html>
